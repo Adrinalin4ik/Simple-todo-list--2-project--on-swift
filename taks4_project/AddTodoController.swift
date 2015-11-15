@@ -17,7 +17,7 @@ class AddTodoController: UITableViewController{
     @IBOutlet weak var saveBtn: UIBarButtonItem!
     
 
-    
+    //передаем массивы в другой активити и посылаем запрос на сервер для добавления данных в списки , если это необходимо
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
 
