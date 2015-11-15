@@ -67,22 +67,18 @@ class AddTodoController: UITableViewController{
         // Dispose of any resources that can be recreated.
     }
     
+    //Запрашиваем данные с сервера
     func downloadData(){
         ///Projects
         Alamofire.request(.GET, "https://task5todo.herokuapp.com/get_projects")
             
             .responseCollection{(response: Response<[Project],NSError>) in
                 self.projects = response.result.value!
-                
-                //debugPrint(response)
         }
-        ////////Todos
+        ///Todos
         Alamofire.request(.GET, "https://task5todo.herokuapp.com/get_todos")
             .responseCollection{(response: Response<[Todo],NSError>) in
-                //todosResponse = response.result.value!
-                //todos = sort(&todosResponse,sortTodos)
-                self.todos = response.result.value!.sort({ $0.id < $1.id })
-                //debugPrint(response)
+                self.todos = response.result.value!.sort({ $0.id < $1.id })//сортируем массив по id
                 self.tableView.reloadData()
         }
         
