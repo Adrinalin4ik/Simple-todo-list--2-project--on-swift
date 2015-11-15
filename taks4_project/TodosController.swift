@@ -114,9 +114,6 @@ class TodosController: UITableViewController{
         
         return view
 
-        //создаем и возвращаем заголовок (к сожалению, сделать header-прототип с помощью storyboard по аналогии с cell невозможно)
-        
-        //http://stackoverflow.com/questions/27449590/correctly-returning-uiview-in-viewforheaderinsection-ios-8-swift (констрейнты нас не интересуют - можно их не использовать)
         
     }
     
