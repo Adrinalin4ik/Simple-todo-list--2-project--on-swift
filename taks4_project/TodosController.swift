@@ -53,19 +53,17 @@ class TodosController: UITableViewController{
     }
     
     func downloadData(){
+        ///Получаем данные с сервера
         ///Projects
         Alamofire.request(.GET, "https://task5todo.herokuapp.com/get_projects")
             
             .responseCollection{(response: Response<[Project],NSError>) in
                 self.projects = response.result.value!
                 
-                //debugPrint(response)
         }
-        ////////Todos
+        ///Todos
         Alamofire.request(.GET, "https://task5todo.herokuapp.com/get_todos")
             .responseCollection{(response: Response<[Todo],NSError>) in
-                //todosResponse = response.result.value!
-                //todos = sort(&todosResponse,sortTodos)
                 self.todos = response.result.value!.sort({ $0.id < $1.id })
                 //debugPrint(response)
                 self.tableView.reloadData()
@@ -87,24 +85,11 @@ class TodosController: UITableViewController{
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-      /*  let view = UIView(frame: CGRectMake(0, 0, 200, 30))
-        let title:UILabel = UILabel()
-        title.text = getProjectsTitles()[section].uppercaseString
-        title.frame = CGRectMake(0, 0, 200, 50)
-        title.font = UIFont(name: UIFont.familyNames()[17], size: 15)
-        
-        
-        
-        
-        view.addSubview(title)
-        return view
-*/
+     // возвращаем название списка задач
        let view = UIView(frame: CGRectMake(0, 0, tableView.frame.width, 30))
         let titleBackground: UILabel = UILabel(frame: CGRectMake(0, 0, view.frame.width, 30))
         let title:UILabel = UILabel(frame: CGRectMake(10, 0, view.frame.width, 30))
         title.text = getProjectsTitles()[section].uppercaseString
-        //title.frame = CGRectMake(10, 0, 200, 50)
-        //title.font = UIFont(name: UIFont.familyNames()[17], size: 12)
         titleBackground.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.2)
         
         title.font = UIFont(name: "Arial", size: 10)
@@ -186,12 +171,6 @@ class TodosController: UITableViewController{
     }
     
     func getProjectTodos(projectId:NSInteger)->Array<Todo>{
-        //var todos = Array<String>()
-        //for (var i=0;i<projects.count;i++){
-        //    if (projects[i].title == getProjectsTitles()[projectId]){
-        //        todos.append(todos[i].todo)
-        //    }
-        //}
         
         var todosArray = Array<Todo>()
         for (var i=0;i<self.todos.count;i++){
